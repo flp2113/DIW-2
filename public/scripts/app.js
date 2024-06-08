@@ -1,4 +1,5 @@
 const github_api_url = "https://api.github.com/users/flp2113";
+const github_api_repos_url = "https://api.github.com/users/flp2113/repos";
 
 const create_profile = async() => {
     const profile_section = document.querySelector("#profile");
@@ -38,8 +39,26 @@ const create_profile = async() => {
         `
         profile_section.innerHTML = user_profile;
     } catch(error){
-        profile_section.innerHTML = '<p>Error while trying to get user profile information.</p>'
-        console.log("Error while trying to get user profile information.", error);
+        profile_section.innerHTML = '<p>Error fetching user profile information.</p>'
+        console.log("Error fetching profile information.", error);
     }
 }
+
+const create_repositories = async() => {
+    try{
+        const response = await axios.get(github_api_repos_url);
+        for(let i = 0; i < response.data.length; i++){
+            console.log(response.data[i].name);
+        }
+        console.log(response.data.length);
+
+    } catch(error){
+        profile_section.innerHTML = '<p>Error fetching user repositories.</p>'
+        console.log("Error fetching user repositories.", error);
+    }
+}
+
+
+
 create_profile();
+create_repositories();
