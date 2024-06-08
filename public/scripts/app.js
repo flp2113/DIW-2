@@ -45,15 +45,31 @@ const create_profile = async() => {
 }
 
 const create_repositories = async() => {
+    const repositories_title = document.querySelector("#repositories-title");
+    const repositories_section = document.querySelector("#repositories");
     try{
-        const response = await axios.get(github_api_repos_url);
-        for(let i = 0; i < response.data.length; i++){
-            console.log(response.data[i].name);
+        const response_repos = await axios.get(github_api_repos_url);
+        repositories_title.innerText = `Repositories (${response_repos.data.length})`;
+        for(let i = 0; i < response_repos.data.length; i++){ 
+            try{
+                let response_inner_repos = await axios.get(`https://api.github.com/repos/flp2113/${response_repos.data[i].name}/contents/docs`);
+                let new_card = document.createElement("div");
+                new_card.classList.add("card");
+                new_card.innerHTML = `
+                    <img src="${response_inner_repos.data.download_url}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${response_repos.data[i].name}</h5>
+                        <p class="card-text">${response_repos.data[i].name}</p>
+                    </div>
+                `
+                repositories_section.append(new_card);
+            } catch(error){
+                repositories_section.innerHTML = '<p>Error fetching inner user repositories.</p>'
+                console.log("Error fetching inner user repositories.", error);
+            }
         }
-        console.log(response.data.length);
-
     } catch(error){
-        profile_section.innerHTML = '<p>Error fetching user repositories.</p>'
+        repositories_section.innerHTML = '<p>Error fetching user repositories.</p>'
         console.log("Error fetching user repositories.", error);
     }
 }
