@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+:root{
+    --pal-purple: rgb(43, 45, 66);
+    --pal-cian: rgb(141, 153, 174);
+    --pal-white: rgb(237, 242, 244);
+    --pal-l-red: rgb(239, 35, 60);
+    --pal-red: rgb(217, 4, 41);
+}
+
+.important{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/*HEADER*/
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 25px 50px;
+}
+
+#header-navbar-content{
+    display: flex;
+    gap: 100px;
+
+    padding: 0;
+}
+
+.header-navbar-link{
+    font-size: 22px;
+    text-decoration: none;
+}
+
+
+/*MAIN*/
+.subheading{ /*CHANGE COLOR*/
+    border-bottom: 2px solid black;
+    padding: 10px;
+}
+
+    /*PROFILE*/
+#profile-picture{
+    width: 250px;
+    height: 250px;
+}
+
+.socialmedia-icons{
+    width: 40px;
+    height: 40px;
+}
+
+.followers-icons{
+    width: 20px;
+    height: 20px;
+}
+
+#profile{
+    display: flex;
+    gap: 25px;
+
+    padding: 15px;
+}
