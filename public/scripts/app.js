@@ -40,7 +40,7 @@ const create_profile = async() => {
         `
         profile_section.innerHTML = user_profile;
     } catch(error){
-        profile_section.innerHTML = '<p>Error fetching user profile information.</p>'
+        profile_section.innerHTML = '<p class="error">Error fetching user profile information.</p>'
         console.log("Error fetching profile information.", error);
     }
 }
@@ -66,12 +66,12 @@ const create_repositories = async() => {
                 `
                 repositories_section.append(new_card);
             } catch(error){
-                repositories_section.innerHTML = '<p>Error fetching inner user repositories.</p>'
+                repositories_section.innerHTML = '<p class="error">Error fetching inner user repositories.</p>'
                 console.log("Error fetching inner user repositories.", error);
             }
         }
     } catch(error){
-        repositories_section.innerHTML = '<p>Error fetching user repositories.</p>'
+        repositories_section.innerHTML = '<p class="error">Error fetching user repositories.</p>'
         console.log("Error fetching user repositories.", error);
     }
 }
@@ -91,22 +91,25 @@ const create_team = async() => {
                 new_cell.classList.add("team-cell");
                 new_cell.innerHTML = `
                 <div class="team-cell">
-                    <img class="team-picture" src="${response_team.data[i].avatar_url}" alt="teammate">
-                    <p class="team-name">${team_name}</p>
+                    <a class="team-link" href="${response_inner_team.data.html_url}" target="_blank">
+                        <img class="team-picture" src="${response_team.data[i].avatar_url}" alt="teammate">
+                        <p class="team-name">${team_name}</p>
+                    </a>
                 </div>
                 `
                 team_section.append(new_cell);
             } catch(error){
-
+                team_section.innerHTML = '<p class="error">Error fetching inner teammates.</p>'
+                console.log("Error fetching inner teammates.", error);
             }
         }
     } catch(error){
-        team_section.innerHTML = '<p>Error fetching teammates.</p>'
+        team_section.innerHTML = '<p class="error">Error fetching teammates.</p>'
         console.log("Error fetching teammates.", error);
     }
 }
 
 create_profile();
-create_repositories();
+//create_repositories();
 
-create_team();
+//create_team();

@@ -1,3 +1,4 @@
+/*RESET DOCUMENT*/
 *,
 *::before,
 *::after{
@@ -8,6 +9,7 @@
     box-sizing: border-box;
 }
 
+/*VARIABLES*/
 :root{
     --pal-purple: rgb(43, 45, 66);
     --pal-cian: rgb(141, 153, 174);
@@ -16,15 +18,31 @@
     --pal-red: rgb(217, 4, 41);
 }
 
+/*GENERAL CLASSES*/
+.error{
+    text-align: center;
+    color: var(--pal-red);
+    font-weight: 600;
+}
+
 .important{
     font-size: 22px;
     font-weight: 600;
+    color: var(--pal-white);
 }
 
 .my-container{
     width: 100%;
     margin: 0 auto;
 }
+
+/*BODY*/
+body{
+    background-color: var(--pal-purple) !important;
+    color: var(--pal-white) !important;
+    font-weight: 500 !important;
+}
+
 
 #profile, #repositories, #highlight, #team{ padding: 15px; }
 
@@ -47,12 +65,24 @@ header{
 .header-navbar-link{
     font-size: 22px;
     text-decoration: none;
+
+    color: var(--pal-white);
+    transition: 0.2s all;
+}
+
+.header-navbar-link:hover{
+    color: var(--pal-cian);
+}
+
+#header-title{
+    color: var(--pal-white);
 }
 
 
 /*MAIN*/
 .subheading{ /*CHANGE COLOR*/
-    border-bottom: 2px solid black;
+    color: var(--pal-white);
+    border-bottom: 2px solid var(--pal-cian);
     padding: 10px;
 }
 
@@ -60,6 +90,7 @@ header{
 #profile-picture{
     width: 250px;
     height: 250px;
+    border: 3px solid var(--pal-cian);
 }
 
 .socialmedia-icons{
@@ -73,6 +104,11 @@ header{
 }
 
 #profile{
+    display: flex;
+    gap: 25px;
+}
+
+#profile-name{
     display: flex;
     gap: 25px;
 }
@@ -92,9 +128,14 @@ header{
 
 .team-name{
     text-align: center;
-
+    
     margin-top: 15px;
 }
+
+.team-link{
+    text-decoration: none;
+}
+
 #team{
     display: flex;
     flex-direction: row;
