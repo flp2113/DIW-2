@@ -120,6 +120,42 @@ header{
     gap: 15px;
 }
 
+.repository-info{
+    display: flex;
+    gap: 15px;
+}
+
+.stars-icons{
+    width: 20px;
+    height: 20px;
+}
+
+.card{
+    transition: 0.2s all;
+}
+
+.card:hover{
+    cursor: pointer;
+    border: 1px solid var(--pal-cian);
+    transform: translateY(-5px);
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: var(--pal-white);
+}
+
+.card-text{
+    font-size: 14px;
+}
+
+.card-title{
+    color: var(--pal-red) !important;
+}
+
     /*TEAM*/
 .team-picture{
     width: 200px;
@@ -142,4 +178,3 @@ header{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
