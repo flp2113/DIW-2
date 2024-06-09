@@ -83,3 +83,22 @@ header{
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
+
+    /*TEAM*/
+.team-picture{
+    width: 200px;
+    height: 200px;
+}
+
+.team-name{
+    text-align: center;
+
+    margin-top: 15px;
+}
+#team{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+

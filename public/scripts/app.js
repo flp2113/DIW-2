@@ -1,5 +1,6 @@
 const github_api_url = "https://api.github.com/users/flp2113";
 const github_api_repos_url = "https://api.github.com/users/flp2113/repos";
+const github_api_following_url = "https://api.github.com/users/flp2113/following";
 
 const create_profile = async() => {
     const profile_section = document.querySelector("#profile");
@@ -44,6 +45,7 @@ const create_profile = async() => {
     }
 }
 
+//FINISH THIS
 const create_repositories = async() => {
     const repositories_title = document.querySelector("#repositories-title");
     const repositories_section = document.querySelector("#repositories");
@@ -52,7 +54,7 @@ const create_repositories = async() => {
         repositories_title.innerText = `Repositories (${response_repos.data.length})`;
         for(let i = 0; i < response_repos.data.length; i++){ 
             try{
-                let response_inner_repos = await axios.get(`https://api.github.com/repos/flp2113/${response_repos.data[i].name}/contents/docs`);
+                let response_inner_repos = await axios.get(`https://api.github.com/repos/flp2113/${response_repos.data[i].name}/contents`);
                 let new_card = document.createElement("div");
                 new_card.classList.add("card");
                 new_card.innerHTML = `
@@ -74,7 +76,37 @@ const create_repositories = async() => {
     }
 }
 
+const create_team = async() => {
+    const team_section = document.querySelector("#team");
+    try{
+        const response_team = await axios.get(github_api_following_url);
+        for(let i = 0; i < response_team.data.length; i++){
+            try{
+                const response_inner_team = await axios.get(`https://api.github.com/users/${response_team.data[i].login}`);
+                let team_name = response_inner_team.data.name;
+                if(team_name == null){
+                    team_name = response_team.data[i].login;
+                }
+                let new_cell = document.createElement("div");
+                new_cell.classList.add("team-cell");
+                new_cell.innerHTML = `
+                <div class="team-cell">
+                    <img class="team-picture" src="${response_team.data[i].avatar_url}" alt="teammate">
+                    <p class="team-name">${team_name}</p>
+                </div>
+                `
+                team_section.append(new_cell);
+            } catch(error){
 
+            }
+        }
+    } catch(error){
+        team_section.innerHTML = '<p>Error fetching teammates.</p>'
+        console.log("Error fetching teammates.", error);
+    }
+}
 
 create_profile();
 create_repositories();
+
+create_team();
