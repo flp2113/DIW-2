@@ -2,15 +2,13 @@ const github_api_url = "https://api.github.com/users/flp2113";
 const github_api_repos_url = "https://api.github.com/users/flp2113/repos";
 const github_api_following_url = "https://api.github.com/users/flp2113/following";
 
-//PROFILE SECTION
 const profile_section = document.querySelector("#profile");
-
-//REPOSITORIES SECTION
 const repositories_title = document.querySelector("#repositories-title");
 const repositories_section = document.querySelector("#repositories");
+const team_section = document.querySelector("#team");
 
 //GET REQUEST FUNCTIONS
-const get_user_info = async () => {
+const get_user = async () => {
     try {
         const response = await axios.get(github_api_url);
         return response.data;
@@ -32,7 +30,7 @@ const get_repositories = async () => {
 
 //CREATE FUNCTIONS
 const create_profile = async () => {
-    const data = await get_user_info();
+    const data = await get_user();
     const user_profile = `       
             <img id="profile-picture" src="${data.avatar_url}" alt="user profile">
             <div id="profile-content">
@@ -71,15 +69,16 @@ const create_profile = async () => {
 const create_repositories = async () => {
     const data = await get_repositories();
     repositories_title.innerText = `Repositories (${data.length})`;
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         let new_card = document.createElement("div");
         new_card.classList.add("card");
         new_card.innerHTML = ` 
                     <img src="assets/img/algorithms.png" class="card-img-top" alt="repositoryimage">
                     <div class="card-body">
-                        <h5 class="card-title">${data[i].name}</h5>
-                        <p class="card-text">${data[i].description}</p>
+                        <div class="card-title-text">
+                            <h5 class="card-title">${data[i].name}</h5>
+                            <p class="card-text">${data[i].description}</p>
+                        </div>
                         <div class="repository-info">
                             <span class="repository-stars">
                                 <svg class="stars-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -100,9 +99,46 @@ const create_repositories = async () => {
     }
 }
 
+const get_team = async (index=0) => {
+    try {
+        const following_response = await axios.get(github_api_following_url);
+        try {
+            const following_inner_response = await axios.get(`https://api.github.com/users/${following_response.data[index].login}`);
+            return [following_response.data, following_inner_response.data];
+        } catch (error) {
+            team_section.innerHTML = '<p class="error">Error inner fetching following users.</p>'
+            console.log("Error inner fetching following users.", error);
+        }
+    } catch (error) {
+        team_section.innerHTML = '<p class="error">Error fetching following users.</p>'
+        console.log("Error fetching following users.", error);
+    }
+}
 
 const create_team = async () => {
-    const team_section = document.querySelector("#team");
+    let vec_data2 = await get_team();
+    for (let i = 0; i < vec_data2[0].length; i++) {
+        let vec_data = await get_team(i);
+        let team_name = vec_data[1].name;
+        if (!team_name) {
+            team_name = vec_data[0][i].login;
+        }
+        let new_cell = document.createElement("div");
+        new_cell.classList.add("team-cell");
+        new_cell.innerHTML = `
+                <div class="team-cell">
+                    <a class="team-link" href="${vec_data[1].html_url}" target="_blank">
+                        <img class="team-picture" src="${vec_data[0][i].avatar_url}" alt="teammate">
+                        <p class="team-name">${team_name}</p>
+                    </a>
+                </div>
+                `
+        team_section.append(new_cell);
+    }
+}
+
+/*
+const create_team = async () => {
     try {
         const response_team = await axios.get(github_api_following_url);
         for (let i = 0; i < response_team.data.length; i++) {
@@ -133,8 +169,8 @@ const create_team = async () => {
         console.log("Error fetching teammates.", error);
     }
 }
+*/
+//create_profile();
+//create_repositories();
 
-create_profile();
-create_repositories();
-
-//create_team();
+create_team();

@@ -160,6 +160,8 @@ header{
 .team-picture{
     width: 200px;
     height: 200px;
+    border: 3px solid var(--pal-cian);
+    border-radius: 2px;
 }
 
 .team-name{
