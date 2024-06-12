@@ -137,40 +137,7 @@ const create_team = async () => {
     }
 }
 
-/*
-const create_team = async () => {
-    try {
-        const response_team = await axios.get(github_api_following_url);
-        for (let i = 0; i < response_team.data.length; i++) {
-            try {
-                const response_inner_team = await axios.get(`https://api.github.com/users/${response_team.data[i].login}`);
-                let team_name = response_inner_team.data.name;
-                if (team_name == null) {
-                    team_name = response_team.data[i].login;
-                }
-                let new_cell = document.createElement("div");
-                new_cell.classList.add("team-cell");
-                new_cell.innerHTML = `
-                <div class="team-cell">
-                    <a class="team-link" href="${response_inner_team.data.html_url}" target="_blank">
-                        <img class="team-picture" src="${response_team.data[i].avatar_url}" alt="teammate">
-                        <p class="team-name">${team_name}</p>
-                    </a>
-                </div>
-                `
-                team_section.append(new_cell);
-            } catch (error) {
-                team_section.innerHTML = '<p class="error">Error fetching inner teammates.</p>'
-                console.log("Error fetching inner teammates.", error);
-            }
-        }
-    } catch (error) {
-        team_section.innerHTML = '<p class="error">Error fetching teammates.</p>'
-        console.log("Error fetching teammates.", error);
-    }
-}
-*/
-//create_profile();
-//create_repositories();
+create_profile();
+create_repositories();
 
 create_team();
