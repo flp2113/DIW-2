@@ -5,9 +5,10 @@ const github_api_following_url = "https://api.github.com/users/flp2113/following
 const profile_section = document.querySelector("#profile");
 const repositories_title = document.querySelector("#repositories-title");
 const repositories_section = document.querySelector("#repositories");
+const highlight_section = document.querySelector("#highlight");
 const team_section = document.querySelector("#team");
 
-//GET REQUEST FUNCTIONS
+//GET FUNCTIONS
 const get_user = async () => {
     try {
         const response = await axios.get(github_api_url);
@@ -25,6 +26,22 @@ const get_repositories = async () => {
     } catch (error) {
         repositories_section.innerHTML = '<p class="error">Error fetching user repositories.</p>'
         console.log("Error fetching user repositories.", error);
+    }
+}
+
+const get_team = async (index=0) => {
+    try {
+        const following_response = await axios.get(github_api_following_url);
+        try {
+            const following_inner_response = await axios.get(`https://api.github.com/users/${following_response.data[index].login}`);
+            return [following_response.data, following_inner_response.data];
+        } catch (error) {
+            team_section.innerHTML = '<p class="error">Error inner fetching following users.</p>'
+            console.log("Error inner fetching following users.", error);
+        }
+    } catch (error) {
+        team_section.innerHTML = '<p class="error">Error fetching following users.</p>'
+        console.log("Error fetching following users.", error);
     }
 }
 
@@ -99,20 +116,8 @@ const create_repositories = async () => {
     }
 }
 
-const get_team = async (index=0) => {
-    try {
-        const following_response = await axios.get(github_api_following_url);
-        try {
-            const following_inner_response = await axios.get(`https://api.github.com/users/${following_response.data[index].login}`);
-            return [following_response.data, following_inner_response.data];
-        } catch (error) {
-            team_section.innerHTML = '<p class="error">Error inner fetching following users.</p>'
-            console.log("Error inner fetching following users.", error);
-        }
-    } catch (error) {
-        team_section.innerHTML = '<p class="error">Error fetching following users.</p>'
-        console.log("Error fetching following users.", error);
-    }
+const create_highlight = async () => {
+
 }
 
 const create_team = async () => {
@@ -139,5 +144,5 @@ const create_team = async () => {
 
 create_profile();
 create_repositories();
-
+create_highlight();
 create_team();
