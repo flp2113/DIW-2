@@ -5,6 +5,7 @@ const github_api_following_url = "https://api.github.com/users/flp2113/following
 const profile_section = document.querySelector("#profile");
 const repositories_title = document.querySelector("#repositories-title");
 const repositories_section = document.querySelector("#repositories");
+const highlight_section = document.querySelector("#highlight");
 const carousel_inner = document.querySelector(".carousel-inner");
 const team_section = document.querySelector("#team");
 
@@ -32,11 +33,11 @@ const get_repositories = async () => {
 const get_highlight = async () => {
     try {
         const response = await axios.get("https://newsapi.org/v2/everything?q=tech", {
-            headers: { "Authorization": "7b367ba517fb4da5b067cb20c6ea6f08" }
+            headers: { "Authorization": `${process.env.API_KEY}` }
         });
         return response.data;
     } catch (error) {
-        repositories_section.innerHTML = '<p class="error">Error fetching highlight.</p>'
+        highlight_section.innerHTML = '<p class="error">Error fetching highlight.</p>'
         console.log("Error fetching highlight.", error);
     }
 }
@@ -131,9 +132,9 @@ const create_repositories = async () => {
 const create_highlight = async () => {
     let counter = 0;
     const data = await get_highlight();
-    for(let i = 0; i < data.totalResults; i++){
-        if(data.articles[i].urlToImage){
-            if(counter == 5){
+    for (let i = 0; i < data.totalResults; i++) {
+        if (data.articles[i].urlToImage) {
+            if (counter == 5) {
                 break;
             }
             let new_carousel_item = document.createElement("div");
