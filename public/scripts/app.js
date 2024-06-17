@@ -5,7 +5,7 @@ const github_api_following_url = "https://api.github.com/users/flp2113/following
 const profile_section = document.querySelector("#profile");
 const repositories_title = document.querySelector("#repositories-title");
 const repositories_section = document.querySelector("#repositories");
-const highlight_section = document.querySelector("#highlight");
+const carousel_inner = document.querySelector(".carousel-inner");
 const team_section = document.querySelector("#team");
 
 //GET FUNCTIONS
@@ -29,7 +29,19 @@ const get_repositories = async () => {
     }
 }
 
-const get_team = async (index=0) => {
+const get_highlight = async () => {
+    try {
+        const response = await axios.get("https://newsapi.org/v2/everything?q=tech", {
+            headers: { "Authorization": "7b367ba517fb4da5b067cb20c6ea6f08" }
+        });
+        return response.data;
+    } catch (error) {
+        repositories_section.innerHTML = '<p class="error">Error fetching highlight.</p>'
+        console.log("Error fetching highlight.", error);
+    }
+}
+
+const get_team = async (index = 0) => {
     try {
         const following_response = await axios.get(github_api_following_url);
         try {
@@ -117,7 +129,27 @@ const create_repositories = async () => {
 }
 
 const create_highlight = async () => {
-
+    let counter = 0;
+    const data = await get_highlight();
+    for(let i = 0; i < data.totalResults; i++){
+        if(data.articles[i].urlToImage){
+            if(counter == 5){
+                break;
+            }
+            let new_carousel_item = document.createElement("div");
+            new_carousel_item.classList.add("carousel-item");
+            new_carousel_item.classList.add("active");
+            new_carousel_item.innerHTML = `
+                <img src="${data.articles[i].urlToImage}" class="d-block w-100" alt="news">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>${data.articles[i].title}</h5>
+                    <p>${data.articles[i].description}</p>
+                </div>
+            `
+            carousel_inner.append(new_carousel_item);
+            counter++;
+        }
+    }
 }
 
 const create_team = async () => {
@@ -142,7 +174,7 @@ const create_team = async () => {
     }
 }
 
-create_profile();
-create_repositories();
+//create_profile();
+//create_repositories();
 create_highlight();
-create_team();
+//create_team();
