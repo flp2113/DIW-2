@@ -174,7 +174,7 @@ const create_team = async () => {
     }
 }
 
-//create_profile();
-//create_repositories();
+create_profile();
+create_repositories();
 create_highlight();
-//create_team();
+create_team();
