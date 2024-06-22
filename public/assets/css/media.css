@@ -1,30 +1,57 @@
 /*MEDIA QUERIES*/
 @media screen and (min-width: 425px) {
-    .my-container{
-        max-width: 425px;
-    }
+    .my-container{ max-width: 425px; }
 }
 
 @media screen and (min-width: 768px) {
-    .my-container{
-        max-width: 768px;
-    }
+    .my-container{ max-width: 768px; }
 }
 
 @media screen and (min-width: 1024px) {
-    .my-container{
-        max-width: 1024px;
-    }
+    .my-container{ max-width: 1024px; }
 }
 
 @media screen and (min-width: 1440px) {
-    .my-container{
-        max-width: 1440px;
-    }
+    .my-container{ max-width: 1440px; }
 }
 
 @media screen and (min-width: 2560px) {
-    .my-container{
-        max-width: 2560px;
-    }
+    .my-container{ max-width: 2560px; }
 }
+
+/*************************************/
+@media screen and (max-width: 2560px) {}
+
+@media screen and (max-width: 1440px) {}
+
+@media screen and (max-width: 1024px) {
+    #repositories{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 768px) {
+    header{ flex-direction: column; }
+
+    .header-navbar-link{ font-size: 18px; }
+
+    #header-navbar-content{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    #profile{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #profile-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #repositories{ grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 425px) {}
