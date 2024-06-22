@@ -33,7 +33,7 @@ const get_repositories = async () => {
 const get_highlight = async () => {
     try {
         const response = await axios.get("https://newsapi.org/v2/everything?q=tech", {
-            headers: { "Authorization": `${process.env.API_KEY}` }
+            headers: { "Authorization": `` }
         });
         return response.data;
     } catch (error) {
@@ -98,8 +98,9 @@ const create_profile = async () => {
 
 const create_repositories = async () => {
     const data = await get_repositories();
-    repositories_title.innerText = `Repositories (${data.length})`;
-    for (let i = 0; i < data.length; i++) {
+    repositories_title.innerTest = `Repositories (${data.length})`;
+    for(let i = 0; i < data.length; i++){
+        let new_link = document.createElement("a");
         let new_card = document.createElement("div");
         new_card.classList.add("card");
         new_card.innerHTML = ` 
@@ -124,8 +125,12 @@ const create_repositories = async () => {
                             </span>
                         </div>
                     </div>
-                `
-        repositories_section.append(new_card);
+                `;
+        new_link.append(new_card);
+        new_link.href = `/repo.html?id=${data[i].id}`;
+        new_link.style.textDecoration = 'none';
+        new_card.style.height = '100%';
+        repositories_section.append(new_link);
     }
 }
 
@@ -175,7 +180,7 @@ const create_team = async () => {
     }
 }
 
-create_profile();
+//create_profile();
 create_repositories();
-create_highlight();
-create_team();
+//create_highlight();
+//create_team();
