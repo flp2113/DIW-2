@@ -98,7 +98,7 @@ const create_profile = async () => {
 
 const create_repositories = async () => {
     const data = await get_repositories();
-    repositories_title.innerTest = `Repositories (${data.length})`;
+    repositories_title.innerText = `Repositories (${data.length})`;
     for(let i = 0; i < data.length; i++){
         let new_link = document.createElement("a");
         let new_card = document.createElement("div");
