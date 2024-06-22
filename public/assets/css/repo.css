@@ -1,0 +1,21 @@
+#repository-info { padding: 15px; }
+
+.repository-stars, .repository-watchers{ font-size: 20px; }
+
+.info{ color: var(--pal-l-red); }
+
+#topics{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.topic{
+    text-align: center;
+    display: block;
+    width: 175px;
+    background-color: var(--pal-l-red);
+    color: var(--pal-white);
+    padding: 10px;
+    border-radius: 10px;
+}

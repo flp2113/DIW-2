@@ -69,12 +69,12 @@ header{
     color: var(--pal-white);
     transition: 0.2s all;
 }
+.header-navbar-link:hover{ color: var(--pal-cian); }
 
-.header-navbar-link:hover{
-    color: var(--pal-cian);
+#header-title{ color: var(--pal-white); }
+
+/*ICONS*/
+.stars-icons, .followers-icons{
+    width: 20px;
+    height: 20px;
 }
-
-#header-title{
-    color: var(--pal-white);
-}
-

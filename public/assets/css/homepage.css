@@ -13,11 +13,6 @@
     height: 40px;
 }
 
-.followers-icons{
-    width: 20px;
-    height: 20px;
-}
-
 #profile{
     display: flex;
     gap: 25px;
@@ -38,11 +33,6 @@
 .repository-info{
     display: flex;
     gap: 15px;
-}
-
-.stars-icons{
-    width: 20px;
-    height: 20px;
 }
 
 .card{ transition: 0.2s all; }
