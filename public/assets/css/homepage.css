@@ -1,91 +1,6 @@
-/*RESET DOCUMENT*/
-*,
-*::before,
-*::after{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-
-/*VARIABLES*/
-:root{
-    --pal-purple: rgb(43, 45, 66);
-    --pal-cian: rgb(141, 153, 174);
-    --pal-white: rgb(237, 242, 244);
-    --pal-l-red: rgb(239, 35, 60);
-    --pal-red: rgb(217, 4, 41);
-}
-
-/*GENERAL CLASSES*/
-.error{
-    text-align: center;
-    color: var(--pal-red);
-    font-weight: 600;
-}
-
-.important{
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--pal-white);
-}
-
-.my-container{
-    width: 100%;
-    margin: 0 auto;
-}
-
-/*BODY*/
-body{
-    background-color: var(--pal-purple) !important;
-    color: var(--pal-white) !important;
-    font-weight: 500 !important;
-}
-
-
 #profile, #repositories, #highlight, #team{ padding: 15px; }
 
-/*HEADER*/
-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 25px 50px;
-}
-
-#header-navbar-content{
-    display: flex;
-    gap: 100px;
-
-    padding: 0;
-}
-
-.header-navbar-link{
-    font-size: 22px;
-    text-decoration: none;
-
-    color: var(--pal-white);
-    transition: 0.2s all;
-}
-
-.header-navbar-link:hover{
-    color: var(--pal-cian);
-}
-
-#header-title{
-    color: var(--pal-white);
-}
-
-
 /*MAIN*/
-.subheading{ /*CHANGE COLOR*/
-    color: var(--pal-white);
-    border-bottom: 2px solid var(--pal-cian);
-    padding: 10px;
-}
-
     /*PROFILE*/
 #profile-picture{
     width: 250px;
@@ -130,10 +45,7 @@ header{
     height: 20px;
 }
 
-.card{
-    transition: 0.2s all;
-}
-
+.card{ transition: 0.2s all; }
 .card:hover{
     cursor: pointer;
     border: 1px solid var(--pal-cian);
@@ -144,19 +56,21 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     background-color: var(--pal-white);
 }
 
-.card-text{
-    font-size: 14px;
-}
+.card-text{ font-size: 14px; }
 
-.card-title{
-    color: var(--pal-red) !important;
-}
+.card-title{ color: var(--pal-red) !important; }
 
     /*TEAM*/
+#team{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .team-picture{
     width: 200px;
     height: 200px;
@@ -166,17 +80,7 @@ header{
 
 .team-name{
     text-align: center;
-    
     margin-top: 15px;
 }
 
-.team-link{
-    text-decoration: none;
-}
-
-#team{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
+.team-link{ text-decoration: none; }

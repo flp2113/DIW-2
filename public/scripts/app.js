@@ -127,7 +127,7 @@ const create_repositories = async () => {
                     </div>
                 `;
         new_link.append(new_card);
-        new_link.href = `/repo.html?id=${data[i].id}`;
+        new_link.href = `/public/repo.html?id=${data[i].id}`;
         new_link.style.textDecoration = 'none';
         new_card.style.height = '100%';
         repositories_section.append(new_link);
