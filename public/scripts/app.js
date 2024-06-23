@@ -15,6 +15,7 @@ const get_user = async () => {
         const response = await axios.get(github_api_url);
         return response.data;
     } catch (error) {
+        profile_section.style.display = "block";
         profile_section.innerHTML = '<p class="error">Error fetching user information.</p>'
         console.log("Error fetching user information.", error);
     }
@@ -25,7 +26,9 @@ const get_repositories = async () => {
         const response = await axios.get(github_api_repos_url);
         return response.data;
     } catch (error) {
-        repositories_section.innerHTML = '<p class="error">Error fetching user repositories.</p>'
+        repositories_title.innerText = "Repositories (0)";
+        repositories_section.style.display = "block";
+        repositories_section.innerHTML = '<p class="error">Error fetching user repositories.</p>';
         console.log("Error fetching user repositories.", error);
     }
 }
@@ -33,7 +36,7 @@ const get_repositories = async () => {
 const get_highlight = async () => {
     try {
         const response = await axios.get("https://newsapi.org/v2/everything?q=tech", {
-            headers: { "Authorization": `` }
+            headers: { "Authorization": `7b367ba517fb4da5b067cb20c6ea6f08` }
         });
         return response.data;
     } catch (error) {

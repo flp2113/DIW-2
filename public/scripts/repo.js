@@ -60,7 +60,7 @@ const display_info = async () => {
             <p>${repository.language}</p>
 
             <p class="important info" id="link">Link</p>
-            <p><a href="${repository.url}">${repository.url}</a></p>
+            <p><a href="${repository.html_url}">${repository.html_url}</a></p>
 
             <p class="important info" id="topics-title">Topics</p>
             <div id="topics"></div>
